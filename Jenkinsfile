@@ -30,12 +30,15 @@ pipeline {
 
         stage('SonarQube Scan') {
             steps {
-                withSonarQubeEnv("${SONARQUBE_SERVER}") {
-                    sh '''
-                    sonar-scanner \
-                      -Dsonar.projectKey=frontend \
-                      -Dsonar.sources=src
-                    '''
+                script {
+                    def scannerHome = tool 'sonar-scanner'
+                    withSonarQubeEnv('SonarQube') {
+                        sh """
+                        ${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=frontend \
+                        -Dsonar.sources=src
+                        """
+                    }
                 }
             }
         }
