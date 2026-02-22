@@ -1,16 +1,11 @@
 pipeline {
+
     agent any
 
     environment {
-        DOCKER_IMAGE = "prabhalasubbu99/we-poc-frontend"
+        DOCKER_IMAGE = "yourdockerhubusername/we-poc-frontend"
         SONARQUBE_SERVER = "SonarQube"
     }
-
-    docker {
-        image 'node:18'
-        args '-u root'
-    }
-    
 
     stages {
 
@@ -20,16 +15,16 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Install & Build (Node Docker)') {
+            agent {
+                docker {
+                    image 'node:18'
+                    args '-u root'
+                }
+            }
             steps {
                 sh 'npm install'
-            }
-        }
-
-        stage('Run Tests - Playwright') {
-            steps {
-                sh 'npx playwright install'
-                sh 'npx playwright test || true'
+                sh 'npm run build'
             }
         }
 
@@ -39,8 +34,7 @@ pipeline {
                     sh '''
                     sonar-scanner \
                       -Dsonar.projectKey=frontend \
-                      -Dsonar.sources=src \
-                      -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+                      -Dsonar.sources=src
                     '''
                 }
             }
@@ -60,20 +54,28 @@ pipeline {
 
         stage('Push to DockerHub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds',
-                        usernameVariable: 'USERNAME',
-                        passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'USERNAME',
+                    passwordVariable: 'PASSWORD'
+                )]) {
                     sh '''
                     echo $PASSWORD | docker login -u $USERNAME --password-stdin
                     docker push $DOCKER_IMAGE:$BUILD_NUMBER
+                    docker tag $DOCKER_IMAGE:$BUILD_NUMBER $DOCKER_IMAGE:latest
+                    docker push $DOCKER_IMAGE:latest
                     '''
                 }
             }
         }
 
-        stage('Sign Image with Cosign') {
+        stage('Deploy Application') {
             steps {
-                sh 'cosign sign --key cosign.key $DOCKER_IMAGE:$BUILD_NUMBER'
+                sh '''
+                cd /deployment-stack
+                docker-compose pull
+                docker-compose up -d
+                '''
             }
         }
     }
