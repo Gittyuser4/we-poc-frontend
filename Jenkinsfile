@@ -34,18 +34,17 @@ pipeline {
                     sh '''
                     docker run --rm \
                     --network devops-stack_default \
-                    -e SONAR_HOST_URL=http://sonarqube:9000 \
-                    -e SONAR_LOGIN=$SONAR_AUTH_TOKEN \
                     -v $(pwd):/usr/src \
                     sonarsource/sonar-scanner-cli:latest \
                     sonar-scanner \
                     -Dsonar.projectKey=frontend \
-                    -Dsonar.sources=src
+                    -Dsonar.sources=src \
+                    -Dsonar.host.url=$SONAR_HOST_URL \
+                    -Dsonar.login=$SONAR_AUTH_TOKEN
                     '''
                 }
             }
         }
-
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t $DOCKER_IMAGE:$BUILD_NUMBER .'
