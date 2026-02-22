@@ -53,7 +53,13 @@ pipeline {
 
         stage('Trivy Scan') {
             steps {
-                sh 'trivy image $DOCKER_IMAGE:$BUILD_NUMBER'
+                sh '''
+                docker run --rm \
+                --network devops-stack_default \
+                -v /var/run/docker.sock:/var/run/docker.sock \
+                aquasec/trivy:latest image \
+                prabhalasubbu99/we-poc-frontend:$BUILD_NUMBER
+                '''
             }
         }
 
