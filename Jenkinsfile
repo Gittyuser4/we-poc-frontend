@@ -38,7 +38,7 @@ pipeline {
                     sonarsource/sonar-scanner-cli:latest \
                     sonar-scanner \
                     -Dsonar.projectKey=frontend \
-                    -Dsonar.sources=src \
+                    -Dsonar.sources=. \
                     -Dsonar.host.url=$SONAR_HOST_URL \
                     -Dsonar.login=$SONAR_AUTH_TOKEN
                     '''
