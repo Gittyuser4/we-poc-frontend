@@ -83,19 +83,15 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 sh '''
-                docker run --rm \
-                -v /var/run/docker.sock:/var/run/docker.sock \
-                -v ${WORKSPACE}:/workspace \
-                -w /workspace \
-                docker/compose:latest \
-                -f docker-compose.yml pull
+                echo "Stopping old container (if exists)..."
+                docker stop we-poc-frontend || true
+                docker rm we-poc-frontend || true
 
-                docker run --rm \
-                -v /var/run/docker.sock:/var/run/docker.sock \
-                -v ${WORKSPACE}:/workspace \
-                -w /workspace \
-                docker/compose:latest \
-                -f docker-compose.yml up -d
+                echo "Running new container..."
+                docker run -d \
+                --name we-poc-frontend \
+                -p 3000:3000 \
+                prabhalasubbu99/we-poc-frontend:${BUILD_NUMBER}
                 '''
             }
         }
