@@ -6,12 +6,11 @@ pipeline {
         SONARQUBE_SERVER = "SonarQube"
     }
 
-    agent {
-      docker {
+    docker {
         image 'node:18'
         args '-u root'
-      }
     }
+    
 
     stages {
 
