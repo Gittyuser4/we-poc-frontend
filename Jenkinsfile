@@ -83,21 +83,17 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 sh '''
-                echo "Workspace path:"
-                echo ${WORKSPACE}
-                ls -la ${WORKSPACE}
+                docker run --rm \
+                -v /var/run/docker.sock:/var/run/docker.sock \
+                -v ${WORKSPACE}:/workspace \
+                -w /workspace \
+                docker/compose:latest pull
 
                 docker run --rm \
                 -v /var/run/docker.sock:/var/run/docker.sock \
                 -v ${WORKSPACE}:/workspace \
-                docker/compose:latest \
-                -f /workspace/docker-compose.yml pull
-
-                docker run --rm \
-                -v /var/run/docker.sock:/var/run/docker.sock \
-                -v ${WORKSPACE}:/workspace \
-                docker/compose:latest \
-                -f /workspace/docker-compose.yml up -d
+                -w /workspace \
+                docker/compose:latest up -d
                 '''
             }
         }
