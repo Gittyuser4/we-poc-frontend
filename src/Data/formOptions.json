@@ -1,0 +1,170 @@
+{
+  "ageGroups": [
+    "18-25",
+    "26-35",
+    "36-45",
+    "46-60",
+    "60+"
+  ],
+  "districts": [],
+  "revenueDivisions": [],
+  "mandals": [],
+  "mandalTypes": [
+    "Urban",
+    "Rural"
+  ],
+  "profileTypes": [
+    { "value": "Homemaker", "label": "Homemaker", "targetStep": "step3" },
+    { "value": "Student", "label": "Student", "targetStep": "step10" },
+    { "value": "Employed", "label": "Employed", "targetStep": "step10" },
+    { "value": "Entrepreneur", "label": "Entrepreneur", "targetStep": "entrepreneurPopup" },
+    { "value": "Farmer", "label": "Farmer", "targetStep": "step8" },
+    { "value": "Differently-Abled", "label": "Differently-Abled", "targetStep": "step7" },
+    { "value": "Unemployed", "label": "Unemployed", "targetStep": "step10" }
+  ],
+  "entrepreneurTypes": [
+    { "value": "Aspiring", "label": "Aspiring Entrepreneur", "targetStep": "step5" },
+    { "value": "Existing", "label": "Existing Entrepreneur", "targetStep": "step6" }
+  ],
+  "yesNo": [
+    "Yes",
+    "No"
+  ],
+  "interests": [
+    "Tailoring",
+    "Food",
+    "Handicrafts",
+    "Beauty",
+    "Online Selling"
+  ],
+  "basicSupport": [
+    "Training",
+    "Funding",
+    "Equipment"
+  ],
+  "businessTypes": [
+    "Retail",
+    "Services",
+    "Manufacturing",
+    "Food & Beverage",
+    "Technology",
+    "Agriculture"
+  ],
+  "scalePreferences": [
+    "Home-based",
+    "Micro",
+    "Small",
+    "Large"
+  ],
+  "entrepreneurSupport": [
+    "Training",
+    "Loan",
+    "Market Access",
+    "Government Scheme Support"
+  ],
+  "businessCategories": [
+    "Retail",
+    "Services",
+    "Manufacturing",
+    "Food & Beverage",
+    "Technology",
+    "Agriculture",
+    "Healthcare",
+    "Education"
+  ],
+  "yearsInOperation": [
+    "Less than 1 year",
+    "1-3 years",
+    "3-5 years",
+    "5-10 years",
+    "10+ years"
+  ],
+  "businessChallenges": [
+    "Finance",
+    "Marketing",
+    "Skills",
+    "Raw Material"
+  ],
+  "improvementGoals": [
+    "Increase Income",
+    "Expand Market",
+    "Digitize"
+  ],
+  "disabledSupport": [
+    "Assistive Devices",
+    "Home-based Work",
+    "Flexible Hours",
+    "Training"
+  ],
+  "workModes": [
+    "Home",
+    "Office",
+    "Digital"
+  ],
+  "farmingInterests": [
+    "Crop Farming",
+    "Dairy",
+    "Poultry",
+    "Fisheries"
+  ],
+  "farmingSupport": [
+    "Farm Implements",
+    "Training",
+    "Subsidy",
+    "Market Access"
+  ],
+  "landPurposes": [
+    "Housing",
+    "Business",
+    "Farming"
+  ],
+  "landSupportTypes": [
+    "Ownership",
+    "Lease",
+    "Scheme Assistance"
+  ],
+  "shortTermGoals": [
+    "Training",
+    "Income",
+    "Job"
+  ],
+  "mediumTermGoals": [
+    "Business",
+    "Stability"
+  ],
+  "longTermGoals": [
+    "Expansion",
+    "Education"
+  ],
+  "trainingAreas": [
+    "Information Technology",
+    "Digital Marketing",
+    "Accounting & Finance",
+    "Hospitality & Tourism",
+    "Healthcare",
+    "Manufacturing Skills",
+    "Agriculture & Agribusiness",
+    "Soft Skills & Communication",
+    "Entrepreneurship",
+    "Other"
+  ],
+  "trainingModes": [
+    "Classroom Training",
+    "Online Training",
+    "Hybrid (Online + Classroom)",
+    "On-the-Job Training"
+  ],
+  "employmentSectors": [
+    "Information Technology",
+    "Healthcare",
+    "Education",
+    "Manufacturing",
+    "Retail",
+    "Hospitality",
+    "Banking & Finance",
+    "Government",
+    "Agriculture",
+    "Construction",
+    "Other"
+  ]
+}

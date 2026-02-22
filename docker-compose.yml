@@ -1,0 +1,61 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./wi-poc-be/django
+      dockerfile: dockerfile
+    container_name: django-backend
+    command: >
+      sh -c "
+      until nc -z postgres 5432; do
+        echo 'Waiting for PostgreSQL...';
+        sleep 2;
+      done &&
+      python manage.py migrate &&
+      gunicorn backend.wsgi:application --bind 0.0.0.0:8000
+      "
+    env_file:
+      - ./wi-poc-be/django/.env
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+    #restart: unless-stopped
+
+  frontend:
+    #build:
+    #  context: ./we-poc-ui
+    #  dockerfile: dockerfile
+    container_name: react-frontend
+    image: react-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    #restart: unless-stopped
+
+  postgres:
+    image: postgres:16
+    container_name: postgres-db
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: we_poc_db
+      POSTGRES_USER: we_poc_user
+      POSTGRES_PASSWORD: Pass@WE#Poc009
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app_user -d app_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

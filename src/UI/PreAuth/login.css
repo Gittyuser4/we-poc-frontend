@@ -1,0 +1,228 @@
+/* Page container */
+.login-page {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+/* 2x2 Image Grid Background */
+.image-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  z-index: 0;
+}
+
+.grid-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.7;
+  transition: transform 0.3s ease;
+}
+
+.grid-item:hover img {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Glass login card */
+.glass-login-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 500px;
+  padding: 3rem 2.5rem;
+  border-radius: 24px;
+  
+  background: linear-gradient(135deg, 
+    rgba(30, 58, 138, 0.96) 0%,
+    rgba(29, 78, 216, 0.96) 35%,
+    rgba(37, 99, 235, 0.96) 70%,
+    rgba(59, 130, 246, 0.96) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35),
+              0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+/* Logo */
+.logo-container {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.login-logo {
+  width: 160px;
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.login-subtitle {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+}
+
+/* Pill input */
+.pill-input .form-control {
+  height: 56px;
+  border-radius: 12px;
+  padding-left: 1.5rem;
+  padding-right: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.95);
+  color: #1e293b;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.pill-input .form-control::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+  opacity: 1;
+}
+
+.pill-input .form-control:focus {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  background: #ffffff;
+}
+
+/* Icon container */
+.input-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 10;
+  transition: color 0.3s ease;
+}
+
+.input-icon:hover {
+  color: #475569;
+}
+
+.pill-input {
+  position: relative;
+}
+
+.pill-input .form-control {
+  padding-right: 3.5rem;
+}
+
+/* Remember / forgot */
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Button */
+.login-btn {
+  width: 100%;
+  height: 52px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  background: #ffffff;
+  color: #6366f1;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.login-btn:hover:not(:disabled) {
+  background: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  color: #4f46e5;
+}
+
+.login-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.login-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Register */
+.register-text {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.register-text span {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .image-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+  }
+  
+  .glass-login-card {
+    padding: 2.5rem 2rem;
+    max-width: 90%;
+  }
+  
+  .login-logo {
+    width: 130px;
+  }
+}
+
+@media (max-width: 480px) {
+  .glass-login-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .login-title {
+    font-size: 1.5rem;
+  }
+  
+  .login-subtitle {
+    font-size: 0.9rem;
+  }
+}

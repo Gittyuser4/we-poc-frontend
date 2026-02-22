@@ -1,0 +1,381 @@
+{
+  "steps": [
+    {
+      "stepId": "step1",
+      "stepNumber": 1,
+      "totalSteps": 6,
+      "title": "Basic Information",
+      "questions": [
+        {
+          "id": "district",
+          "label": "District",
+          "type": "dropdown",
+          "required": true,
+          "optionsKey": "districts",
+          "rowGroup": "location-row-1"
+        },
+        {
+          "id": "revenueDivision",
+          "label": "Revenue Division",
+          "type": "dropdown",
+          "required": true,
+          "optionsKey": "revenueDivisions",
+          "rowGroup": "location-row-1",
+          "dependsOn": "district"
+        },
+        {
+          "id": "mandal",
+          "label": "Mandal",
+          "type": "dropdown",
+          "required": true,
+          "optionsKey": "mandals",
+          "rowGroup": "location-row-2",
+          "dependsOn": "revenueDivision"
+        },
+        {
+          "id": "mandalType",
+          "label": "Mandal Type",
+          "type": "radioTiles",
+          "required": true,
+          "optionsKey": "mandalTypes",
+          "rowGroup": "demographics-row"
+        },
+        {
+          "id": "ageGroup",
+          "label": "Age Group",
+          "type": "dropdown",
+          "required": true,
+          "optionsKey": "ageGroups",
+          "rowGroup": "demographics-row"
+        }
+      ],
+      "nextStep": "step2"
+    },
+    {
+      "stepId": "step2",
+      "stepNumber": 2,
+      "totalSteps": 6,
+      "title": "Profile Selection",
+      "questions": [
+        {
+          "id": "profileType",
+          "label": "Which best describes you?",
+          "type": "cards",
+          "required": true,
+          "optionsKey": "profileTypes"
+        }
+      ],
+      "nextStepLogic": {
+        "Homemaker": "step3",
+        "Student": "step11",
+        "Employed": "step10",
+        "Entrepreneur": "entrepreneurPopup",
+        "Farmer": "step8",
+        "Differently-Abled": "step7",
+        "Unemployed": "step11"
+      }
+    },
+    {
+      "stepId": "entrepreneurPopup",
+      "stepNumber": 2,
+      "totalSteps": 6,
+      "title": "Entrepreneur Type",
+      "questions": [
+        {
+          "id": "entrepreneurType",
+          "label": "Select your business status",
+          "type": "cards",
+          "required": true,
+          "optionsKey": "entrepreneurTypes"
+        }
+      ],
+      "nextStepLogic": {
+        "Aspiring": "step5",
+        "Existing": "step6"
+      }
+    },
+    {
+      "stepId": "step3",
+      "stepNumber": 3,
+      "totalSteps": 6,
+      "title": "Income Activity Interest",
+      "questions": [
+        {
+          "id": "startIncomeActivity",
+          "label": "Do you want to start an income activity?",
+          "type": "radio",
+          "required": true,
+          "optionsKey": "yesNo"
+        },
+        {
+          "id": "interests",
+          "label": "What are you interested in?",
+          "type": "chips",
+          "required": false,
+          "optionsKey": "interests",
+          "visibleWhen": {
+            "questionId": "startIncomeActivity",
+            "value": "Yes"
+          }
+        },
+        {
+          "id": "supportNeeded",
+          "label": "What support do you need?",
+          "type": "checkbox",
+          "required": false,
+          "optionsKey": "basicSupport",
+          "visibleWhen": {
+            "questionId": "startIncomeActivity",
+            "value": "Yes"
+          }
+        }
+      ],
+      "nextStep": "step9"
+    },
+    {
+      "stepId": "step5",
+      "stepNumber": 3,
+      "totalSteps": 6,
+      "title": "Aspiring Entrepreneur",
+      "questions": [
+        {
+          "id": "businessType",
+          "label": "Business Type",
+          "type": "dropdown",
+          "required": true,
+          "optionsKey": "businessTypes"
+        },
+        {
+          "id": "scalePreference",
+          "label": "Scale Preference",
+          "type": "radio",
+          "required": true,
+          "optionsKey": "scalePreferences"
+        },
+        {
+          "id": "supportNeeded",
+          "label": "Support Needed",
+          "type": "checkbox",
+          "required": false,
+          "optionsKey": "entrepreneurSupport"
+        }
+      ],
+      "nextStep": "step9"
+    },
+    {
+      "stepId": "step6",
+      "stepNumber": 3,
+      "totalSteps": 6,
+      "title": "Existing Entrepreneur",
+      "questions": [
+        {
+          "id": "businessCategory",
+          "label": "Business Category",
+          "type": "dropdown",
+          "required": true,
+          "optionsKey": "businessCategories"
+        },
+        {
+          "id": "yearsInOperation",
+          "label": "Years in Operation",
+          "type": "dropdown",
+          "required": true,
+          "optionsKey": "yearsInOperation"
+        },
+        {
+          "id": "challenges",
+          "label": "Challenges",
+          "type": "chips",
+          "required": false,
+          "optionsKey": "businessChallenges"
+        },
+        {
+          "id": "improvementGoals",
+          "label": "Improvement Goals",
+          "type": "checkbox",
+          "required": false,
+          "optionsKey": "improvementGoals"
+        }
+      ],
+      "nextStep": "step9"
+    },
+    {
+      "stepId": "step7",
+      "stepNumber": 3,
+      "totalSteps": 6,
+      "title": "Differently-Abled Support",
+      "questions": [
+        {
+          "id": "supportRequired",
+          "label": "Support Required",
+          "type": "checkbox",
+          "required": false,
+          "optionsKey": "disabledSupport"
+        },
+        {
+          "id": "preferredWorkMode",
+          "label": "Preferred Work Mode",
+          "type": "radio",
+          "required": true,
+          "optionsKey": "workModes"
+        }
+      ],
+      "nextStep": "step9"
+    },
+    {
+      "stepId": "step8",
+      "stepNumber": 3,
+      "totalSteps": 6,
+      "title": "Agriculture & Farming",
+      "questions": [
+        {
+          "id": "interestArea",
+          "label": "Interest Area",
+          "type": "checkbox",
+          "required": false,
+          "optionsKey": "farmingInterests"
+        },
+        {
+          "id": "supportNeeded",
+          "label": "Support Needed",
+          "type": "checkbox",
+          "required": false,
+          "optionsKey": "farmingSupport"
+        }
+      ],
+      "nextStep": "step9"
+    },
+    {
+      "stepId": "step4",
+      "stepNumber": 4,
+      "totalSteps": 6,
+      "title": "Land Requirements",
+      "questions": [
+        {
+          "id": "requireLand",
+          "label": "Do you require Land (Yes / No)",
+          "description": "If no exclude below and navigate to page 10 on clicking continue button without showing land for and type of support",
+          "type": "radio",
+          "required": true,
+          "optionsKey": "yesNo"
+        },
+        {
+          "id": "landFor",
+          "label": "Land for",
+          "type": "checkbox",
+          "required": false,
+          "optionsKey": "landPurposes",
+          "visibleWhen": {
+            "questionId": "requireLand",
+            "value": "Yes"
+          }
+        },
+        {
+          "id": "typeOfSupport",
+          "label": "Type of support",
+          "type": "radio",
+          "required": false,
+          "optionsKey": "landSupportTypes",
+          "visibleWhen": {
+            "questionId": "requireLand",
+            "value": "Yes"
+          }
+        }
+      ],
+      "nextStep": "step10"
+    },
+    {
+      "stepId": "step9",
+      "stepNumber": 5,
+      "totalSteps": 6,
+      "title": "Time Horizon",
+      "questions": [
+        {
+          "id": "shortTerm",
+          "label": "Short-Term (0–1 year)",
+          "type": "checkbox",
+          "required": false,
+          "optionsKey": "shortTermGoals"
+        },
+        {
+          "id": "mediumTerm",
+          "label": "Medium-Term (1–3 years)",
+          "type": "checkbox",
+          "required": false,
+          "optionsKey": "mediumTermGoals"
+        },
+        {
+          "id": "longTerm",
+          "label": "Long-Term (3–5 years)",
+          "type": "checkbox",
+          "required": false,
+          "optionsKey": "longTermGoals"
+        }
+      ],
+      "nextStep": "step10"
+    },
+    {
+      "stepId": "step11",
+      "stepNumber": 3,
+      "totalSteps": 6,
+      "title": "Training & Development",
+      "questions": [
+        {
+          "id": "interestedInTraining",
+          "label": "Are you interested in skill development training?",
+          "type": "radio",
+          "required": true,
+          "optionsKey": "yesNo"
+        },
+        {
+          "id": "trainingAreas",
+          "label": "Select areas of interest for training",
+          "type": "checkbox",
+          "required": false,
+          "optionsKey": "trainingAreas",
+          "visibleWhen": {
+            "questionId": "interestedInTraining",
+            "value": "Yes"
+          }
+        },
+        {
+          "id": "trainingMode",
+          "label": "Preferred mode of training",
+          "type": "radio",
+          "required": false,
+          "optionsKey": "trainingModes",
+          "visibleWhen": {
+            "questionId": "interestedInTraining",
+            "value": "Yes"
+          }
+        },
+        {
+          "id": "employmentInterest",
+          "label": "Are you interested in employment opportunities?",
+          "type": "radio",
+          "required": true,
+          "optionsKey": "yesNo"
+        },
+        {
+          "id": "employmentSectors",
+          "label": "Preferred employment sectors",
+          "type": "chips",
+          "required": false,
+          "optionsKey": "employmentSectors",
+          "visibleWhen": {
+            "questionId": "employmentInterest",
+            "value": "Yes"
+          }
+        }
+      ],
+      "nextStep": "step9"
+    },
+    {
+      "stepId": "step10",
+      "stepNumber": 6,
+      "totalSteps": 6,
+      "title": "Thank You",
+      "isComplete": true
+    }
+  ]
+}

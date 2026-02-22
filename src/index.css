@@ -1,0 +1,60 @@
+/* Darker checkbox borders for better visibility */
+.darker-checkbox .form-check-input {
+  border: 2px solid #333 !important;
+  border-radius: 4px;
+}
+
+.darker-checkbox .form-check-input:checked {
+  background-color: #0d6efd;
+  border-color: #0d6efd !important;
+}
+
+.darker-checkbox .form-check-input:focus {
+  border-color: #0d6efd !important;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Radio tile icons */
+.radio-tile-icon {
+  text-align: center;
+  color: #6c757d;
+  transition: all 0.3s ease;
+}
+
+.radio-tile.active .radio-tile-icon {
+  color: #0d6efd;
+  transform: scale(1.1);
+}
+
+.radio-tile {
+  transition: all 0.3s ease;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.radio-tile:hover .radio-tile-icon {
+  color: #0d6efd;
+  transform: scale(1.05);
+}
+
+/* Hide radio button when icon is present */
+.radio-tile.has-icon .form-check-input {
+  display: none;
+}
+
+.radio-tile.has-icon .form-check-label {
+  padding-left: 0;
+  cursor: pointer;
+}
+
+.custom-consent-checkbox .form-check-input {
+  border: 1px solid black;
+  width: 18px;
+  height: 18px;
+}
