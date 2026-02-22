@@ -83,9 +83,17 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 sh '''
-                cd /deployment-stack
-                docker compose pull
-                docker compose up -d
+                docker run --rm \
+                -v /var/run/docker.sock:/var/run/docker.sock \
+                -v /deployment-stack:/deployment-stack \
+                docker/compose:latest \
+                -f /deployment-stack/docker-compose.yml pull
+
+                docker run --rm \
+                -v /var/run/docker.sock:/var/run/docker.sock \
+                -v /deployment-stack:/deployment-stack \
+                docker/compose:latest \
+                -f /deployment-stack/docker-compose.yml up -d
                 '''
             }
         }
