@@ -6,8 +6,11 @@ pipeline {
         SONARQUBE_SERVER = "SonarQube"
     }
 
-    tools {
-        nodejs "node18"
+    agent {
+      docker {
+        image 'node:18'
+        args '-u root'
+      }
     }
 
     stages {
