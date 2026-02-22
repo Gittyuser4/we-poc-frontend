@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "yourdockerhubusername/we-poc-frontend"
+        DOCKER_IMAGE = "prabhalasubbu99/we-poc-frontend"
         SONARQUBE_SERVER = "SonarQube"
     }
 
