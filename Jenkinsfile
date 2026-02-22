@@ -85,15 +85,15 @@ pipeline {
                 sh '''
                 docker run --rm \
                 -v /var/run/docker.sock:/var/run/docker.sock \
-                -v /deployment-stack:/deployment-stack \
+                -v $PWD:/workspace \
                 docker/compose:latest \
-                -f /deployment-stack/docker-compose.yml pull
+                -f /workspace/docker-compose.yml pull
 
                 docker run --rm \
                 -v /var/run/docker.sock:/var/run/docker.sock \
-                -v /deployment-stack:/deployment-stack \
+                -v $PWD:/workspace \
                 docker/compose:latest \
-                -f /deployment-stack/docker-compose.yml up -d
+                -f /workspace/docker-compose.yml up -d
                 '''
             }
         }
