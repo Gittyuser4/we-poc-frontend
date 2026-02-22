@@ -87,13 +87,15 @@ pipeline {
                 -v /var/run/docker.sock:/var/run/docker.sock \
                 -v ${WORKSPACE}:/workspace \
                 -w /workspace \
-                docker/compose:latest pull
+                docker/compose:latest \
+                -f docker-compose.yml pull
 
                 docker run --rm \
                 -v /var/run/docker.sock:/var/run/docker.sock \
                 -v ${WORKSPACE}:/workspace \
                 -w /workspace \
-                docker/compose:latest up -d
+                docker/compose:latest \
+                -f docker-compose.yml up -d
                 '''
             }
         }
