@@ -30,15 +30,15 @@ pipeline {
 
         stage('SonarQube Scan') {
             steps {
-                script {
-                    def scannerHome = tool 'sonar-scanner'
-                    withSonarQubeEnv('SonarQube') {
-                        sh """
-                        ${scannerHome}/bin/sonar-scanner \
-                        -Dsonar.projectKey=frontend \
-                        -Dsonar.sources=src
-                        """
-                    }
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                    docker run --rm \
+                    -e SONAR_HOST_URL=$SONAR_HOST_URL \
+                    -e SONAR_LOGIN=$SONAR_AUTH_TOKEN \
+                    -v $(pwd):/usr/src \
+                    -Dsonar.projectKey=frontend \
+                    -Dsonar.sources=src
+                    '''
                 }
             }
         }
