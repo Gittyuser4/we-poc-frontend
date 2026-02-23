@@ -23,27 +23,29 @@ pipeline {
                 }
             }
             steps {
-                sh 'npm install'
-                sh 'npm run build'
-            }
-        }
-        
-        stage('Install Playwright Browsers') {
-            steps {
                 sh '''
-                    npx playwright install --with-deps
+                    npm install
+                    npm run build
                 '''
             }
         }
 
         stage('Run Playwright Tests') {
+            agent {
+                docker {
+                    image 'mcr.microsoft.com/playwright:v1.42.1-jammy'
+                    args '-u root'
+                }
+            }
             steps {
                 sh '''
+                    npm install
+                    npx playwright install --with-deps
                     npx playwright test
                 '''
             }
         }
-        
+
         stage('SonarQube Scan') {
             steps {
                 withSonarQubeEnv('SonarQube') {
@@ -61,6 +63,7 @@ pipeline {
                 }
             }
         }
+
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t $DOCKER_IMAGE:$BUILD_NUMBER .'
@@ -74,7 +77,7 @@ pipeline {
                 --network devops-stack_default \
                 -v /var/run/docker.sock:/var/run/docker.sock \
                 aquasec/trivy:latest image \
-                prabhalasubbu99/we-poc-frontend:$BUILD_NUMBER
+                $DOCKER_IMAGE:$BUILD_NUMBER
                 '''
             }
         }
@@ -107,7 +110,7 @@ pipeline {
                 docker run -d \
                 --name we-poc-frontend \
                 -p 3001:5173 \
-                prabhalasubbu99/we-poc-frontend:latest
+                $DOCKER_IMAGE:latest
                 '''
             }
         }
