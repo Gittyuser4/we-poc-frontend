@@ -39,12 +39,11 @@ pipeline {
             }
             steps {
                 sh '''
-                    npm install
-                    npx playwright install --with-deps
+                    npm ci
                     npx playwright test
                 '''
             }
-        }
+}
 
         stage('SonarQube Scan') {
             steps {
