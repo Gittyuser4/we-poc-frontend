@@ -83,14 +83,14 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 sh '''
-                echo "Stopping old container (if exists)..."
+                echo "Stopping existing container..."
                 docker stop we-poc-frontend || true
                 docker rm we-poc-frontend || true
 
-                echo "Running new container..."
+                echo "Starting new container on port 3001..."
                 docker run -d \
                 --name we-poc-frontend \
-                -p 3000:3000 \
+                -p 3001:3000 \
                 prabhalasubbu99/we-poc-frontend:${BUILD_NUMBER}
                 '''
             }
