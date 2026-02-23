@@ -18,7 +18,7 @@ pipeline {
         stage('Install & Build (Node Docker)') {
             agent {
                 docker {
-                    image 'node:18'
+                    image 'node:20'
                     args '-u root'
                 }
             }
@@ -33,7 +33,7 @@ pipeline {
         stage('Run Playwright Tests') {
             agent {
                 docker {
-                    image 'mcr.microsoft.com/playwright:v1.42.1-jammy'
+                    image 'mcr.microsoft.com/playwright:v1.45.0-jammy'
                     args '-u root'
                 }
             }
