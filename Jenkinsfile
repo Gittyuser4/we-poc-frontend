@@ -27,7 +27,23 @@ pipeline {
                 sh 'npm run build'
             }
         }
+        
+        stage('Install Playwright Browsers') {
+            steps {
+                sh '''
+                    npx playwright install --with-deps
+                '''
+            }
+        }
 
+        stage('Run Playwright Tests') {
+            steps {
+                sh '''
+                    npx playwright test
+                '''
+            }
+        }
+        
         stage('SonarQube Scan') {
             steps {
                 withSonarQubeEnv('SonarQube') {
