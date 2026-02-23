@@ -90,8 +90,8 @@ pipeline {
                 echo "Starting new container on port 3001..."
                 docker run -d \
                 --name we-poc-frontend \
-                -p 3001:80 \
-                prabhalasubbu99/we-poc-frontend:${BUILD_NUMBER}
+                -p 3001:5173 \
+                prabhalasubbu99/we-poc-frontend:25
                 '''
             }
         }
