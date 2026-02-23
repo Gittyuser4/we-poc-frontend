@@ -33,7 +33,7 @@ pipeline {
         stage('Run Playwright Tests') {
             agent {
                 docker {
-                    image 'mcr.microsoft.com/playwright:v1.45.0-jammy'
+                    image 'mcr.microsoft.com/playwright:v1.58.2-jammy'
                     args '-u root'
                 }
             }
