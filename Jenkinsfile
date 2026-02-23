@@ -91,7 +91,7 @@ pipeline {
                 docker run -d \
                 --name we-poc-frontend \
                 -p 3001:5173 \
-                prabhalasubbu99/we-poc-frontend:25
+                prabhalasubbu99/we-poc-frontend:latest
                 '''
             }
         }
