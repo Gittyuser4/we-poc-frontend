@@ -3,8 +3,10 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "prabhalasubbu99/we-poc-frontend"
-        SONARQUBE_SERVER = "SonarQube"
+         DOCKER_IMAGE = "${DOCKER_NAMESPACE}/${JOB_BASE_NAME}"
+         IMAGE_TAG = "${BUILD_NUMBER}"
+
+       // SONARQUBE_SERVER = "SonarQube"
     }
 
     stages {
@@ -47,7 +49,7 @@ pipeline {
 
         stage('SonarQube Scan') {
             steps {
-                withSonarQubeEnv('SonarQube') {
+                withSonarQubeEnv("${SONAR_SERVER_NAME}") {
                     sh '''
                     docker run --rm \
                     --network devops-stack_default \
