@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   backend:
-    build: ../wi-poc-be/django
+    build: ./wi-poc-be/django
     #  dockerfile: dockerfile
     #container_name: django-backend
     command: >
