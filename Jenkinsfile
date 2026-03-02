@@ -103,15 +103,12 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 sh '''
-                echo "Stopping existing container..."
-                docker stop we-poc-frontend || true
-                docker rm we-poc-frontend || true
+                echo "Stopping existing containers..."
+                docker compose down || true
 
-                echo "Starting new container on port 3001..."
-                docker run -d \
-                --name we-poc-frontend \
-                -p 3001:5173 \
-                $DOCKER_IMAGE:latest
+                echo "Deploying using docker compose..."
+                export DOCKER_IMAGE=$DOCKER_IMAGE
+                docker compose up -d frontend
                 '''
             }
         }
