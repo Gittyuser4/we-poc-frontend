@@ -106,11 +106,8 @@ pipeline {
                 echo "Pulling latest image..."
                 docker pull $DOCKER_IMAGE:latest
 
-                echo "Stopping old container..."
-                docker-compose down || true
-
-                echo "Starting new container using docker-compose..."
-                docker-compose up -d
+                docker-compose -f ./app-stack/docker-compose.yml down || true
+                docker-compose -f ./app-stack/docker-compose.yml up -d
                 '''
             }
         }
