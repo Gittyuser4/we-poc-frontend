@@ -106,8 +106,11 @@ pipeline {
                 echo "Pulling latest image..."
                 docker pull $DOCKER_IMAGE:latest
 
-                docker-compose -f ./app-stack/docker-compose.yml down || true
-                docker-compose -f ./app-stack/docker-compose.yml up -d
+                echo "Changing to project root..."
+                cd /home/jenkins/workspace/we-poc-ui
+
+                docker-compose down || true
+                docker-compose up -d
                 '''
             }
         }
