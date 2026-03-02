@@ -103,12 +103,14 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 sh '''
-                echo "Stopping existing containers..."
-                docker compose down || true
+                echo "Pulling latest image..."
+                docker pull $DOCKER_IMAGE:latest
 
-                echo "Deploying using docker compose..."
-                export DOCKER_IMAGE=$DOCKER_IMAGE
-                docker compose up -d frontend
+                echo "Stopping old container..."
+                docker-compose down || true
+
+                echo "Starting new container using docker-compose..."
+                docker-compose up -d
                 '''
             }
         }
