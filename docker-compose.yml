@@ -2,9 +2,9 @@ version: "3.9"
 
 services:
   backend:
-    build: ../wi-poc-be-pre-dev/django
+    build: ../wi-poc-be/django
     #  dockerfile: dockerfile
-    container_name: django-backend
+    #container_name: django-backend
     command: >
       sh -c "
       until nc -z postgres 5432; do
