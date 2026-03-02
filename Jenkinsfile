@@ -49,22 +49,22 @@ pipeline {
 
         stage('SonarQube Scan') {
             steps {
-                withSonarQubeEnv("${SONAR_SERVER_NAME}") {
-                    sh '''
-                    docker run --rm \
-                    --network devops-stack_default \
-                    -v $(pwd):/usr/src \
-                    sonarsource/sonar-scanner-cli:latest \
-                    sonar-scanner \
-                    -Dsonar.projectKey=frontend \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=$SONAR_HOST_URL \
-                    -Dsonar.login=$SONAR_AUTH_TOKEN
-                    '''
+                script {
+                    def scannerHome = tool 'sonar-scanner'
+                    withSonarQubeEnv('SonarQube') {
+                        withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                            sh """
+                                ${scannerHome}/bin/sonar-scanner \
+                                -Dsonar.projectKey=we-poc-ui \
+                                -Dsonar.sources=. \
+                                -Dsonar.python.version=3.10 \
+                                -Dsonar.login=$SONAR_TOKEN
+                            """
+                        }
+                    }
                 }
             }
         }
-
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t $DOCKER_IMAGE:$BUILD_NUMBER .'
