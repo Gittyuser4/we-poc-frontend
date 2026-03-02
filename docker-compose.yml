@@ -27,7 +27,7 @@ services:
     #  context: ./we-poc-ui
     #  dockerfile: dockerfile
     container_name: react-frontend
-    image: react-frontend
+    image: ${DOCKER_IMAGE}:latest
     ports:
       - "5173:5173"
     depends_on:
