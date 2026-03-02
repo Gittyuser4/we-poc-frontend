@@ -107,9 +107,12 @@ pipeline {
                 docker pull $DOCKER_IMAGE:latest
 
                 echo "Changing to project root..."
-                cd /home/jenkins/workspace/we-poc-ui
+                cd $WORKSPACE
 
+                echo "Stopping existing stack..."
                 docker-compose down || true
+
+                echo "Starting stack..."
                 docker-compose up -d
                 '''
             }
